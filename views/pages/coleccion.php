@@ -3,8 +3,13 @@
     <div class="row" style="margin-top: 30px;">
         <div class="col-md-3 py-3 py-md-0">
             <div class="card">
+                <script>
+                    function myfunction(){
+	                    window.location = "http://localhost/views/pages/Carrito-De-Compras-master/shop-single.php";
+                    }
+                </script>
                 <img src="./assets/image/p11.jpg" width="250px" height="260px" alt="">
-                <div class="card-body">
+                <div class="card-body" id="body_card" onclick="myfunction()">
                     <h3>Girls Heel</h3>
                     <p>Lorem ipsum dolor sit amet.</p>
                     <div class="star">
