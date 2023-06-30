@@ -5,7 +5,7 @@
             <div class="card">
                 <script>
                     function myfunction(){
-	                    window.location = "http://localhost/views/pages/Carrito-De-Compras-master/shop-single.php";
+	                    window.location = "http://localhost/views/pages/carrito/shop-single.php";
                     }
                 </script>
                 <img src="./assets/image/p11.jpg" width="250px" height="260px" alt="">
