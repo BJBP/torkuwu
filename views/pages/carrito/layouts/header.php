@@ -1,4 +1,4 @@
-<!-- <header class="site-navbar" role="banner">
+<header class="site-navbar" role="banner">
       <div class="site-navbar-top">
         <div class="container">
           <div class="row align-items-center">
@@ -24,7 +24,14 @@
                   <li>
                     <a href="cart.php" class="site-cart">
                       <span class="icon icon-shopping_cart"></span>
-                      <span class="count">2</span>
+                      <span class="count">
+                      <?php if(isset($_SESSION['carrito'])){ 
+                        echo count($_SESSION['carrito' ]); 
+                      }else{ 
+                        echo 0; 
+                      }
+                      ?>
+                      </span>
                     </a>
                   </li> 
                   <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
@@ -62,5 +69,5 @@
            <strong class="text-black">Shop</strong></div>
         </div>
       </div>
-    </div> -->
+    </div>
     <img src="images/header.png" alt="Image placeholder" class="img-fluid" width="1366" height="100">

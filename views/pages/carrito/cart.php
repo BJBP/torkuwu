@@ -1,3 +1,64 @@
+<?php
+session_start();
+include './php/conexion.php';  
+if(isset($_SESSION['carrito'])){
+//si existe buscamos si ya estaba agregado ese producto
+  if(isset($_GET['id'])){
+    $arreglo =$_SESSION['carrito'];
+    $encontro=false;
+    $numero = 0;
+    for ($i=0;$i<count($arreglo); $i++){
+      if($arreglo[$i]['Id'] == $_GET['id']){
+      $encontro=true;
+      $numero=$i;
+      }
+    }
+    if($encontro == true){
+    $arreglo[$numero]['Cantidad']=$arreglo [$numero]['Cantidad']+1;
+    $_SESSION['carrito']=$arreglo;
+    }else{
+      $nombre ="";
+      $precio =""; 
+      $imagen="";
+      $res= $conexion->query('select * from productos where id='.$_GET['id'])or die($conexion->error);
+      $fila= mysqli_fetch_row($res);    
+          $nombre=$fila[1];
+      $precio=$fila[3];
+      $imagen=$fila[4];
+      $arregloNuevo = array(
+        'Id' => $_GET['id'],
+        'Nombre' => $nombre,
+        'Precio'=>$precio,
+        'Imagen' => $imagen,
+        'Cantidad' => 1
+      );
+      array_push($arreglo, $arregloNuevo);
+      $_SESSION['carrito']=$arreglo;
+      }
+    }
+  }else{
+  //creamos la variable de sesion
+  if(isset($_GET['id'])){
+    $nombre ="";
+    $precio =""; 
+    $imagen="";
+    $res= $conexion->query('select * from productos where id='.$_GET['id'])or die($conexion->error);
+    $fila= mysqli_fetch_row($res);
+    $nombre=$fila[1];
+    $precio=$fila[3];
+    $imagen=$fila[4];
+    $arreglo[] = array(
+    'Id' => $_GET['id'],
+    'Nombre' => $nombre,
+    'Precio'=>$precio,
+    'Imagen' => $imagen,
+    'Cantidad' => 1
+  );
+$_SESSION['carrito']=$arreglo;
+}
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,53 +103,39 @@
                   </tr>
                 </thead>
                 <tbody>
+                <?php
+                if(isset($_SESSION['carrito'])){ 
+                  $arregloCarrito =$_SESSION['carrito']; 
+                  for ($i=0;$i<count($arregloCarrito); $i++){
+                ?>
                   <tr>
                     <td class="product-thumbnail">
-                      <img src="images/cloth_1.jpg" alt="Image" class="img-fluid">
+                      <img src="images/<?php echo $arregloCarrito[$i]['Imagen'];?>" alt="Image" class="img-fluid">
                     </td>
                     <td class="product-name">
-                      <h2 class="h5 text-black">Camiseta</h2>
+                      <h2 class="h5 text-black"><?php echo $arregloCarrito[$i]['Nombre']; ?></h2>
                     </td>
-                    <td>S/49.00</td>
+                    <td>S/<?php echo $arregloCarrito[$i]['Precio'];?></td>
                     <td>
                       <div class="input-group mb-3" style="max-width: 120px;">
                         <div class="input-group-prepend">
                           <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
                         </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input type="text" class="form-control text-center" value="<?php echo $arregloCarrito[$i]['Cantidad'];?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                         <div class="input-group-append">
                           <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                         </div>
                       </div>
 
                     </td>
-                    <td>S/49.00</td>
-                    <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
+                    <td>S/<?php echo $arregloCarrito[$i]['Precio']*$arregloCarrito[$i]['Cantidad'];?></td>
+                    <td><a href="#" class="btn btn-primary btn-sm btnEliminar" data-id="<?php echo $arregloCarrito[$i]['Id'];?>">X</a></td>
                   </tr>
 
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img src="images/cloth_2.jpg" alt="Image" class="img-fluid">
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">Polo Shirt</h2>
-                    </td>
-                    <td>S/49.00</td>
-                    <td>
-                      <div class="input-group mb-3" style="max-width: 120px;">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                        </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                        </div>
-                      </div>
+                  
+                <?php }} ?>
 
-                    </td>
-                    <td>S/49.00</td>
-                    <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
-                  </tr>
+                  
                 </tbody>
               </table>
             </div>
@@ -167,6 +214,25 @@
   <script src="js/aos.js"></script>
 
   <script src="js/main.js"></script>
+  <script>
+    $(document).ready(function(){
+      $(".btnEliminar").click(function(event){ 
+        event.preventDefault();
+        var id = $(this).data('id');
+        var boton = $(this);
+        $.ajax({
+          method: 'POST',
+          url:'./php/eliminarCarrito.php',
+          data: {
+            id:id
+          }
+        }).done(function(respuesta){
+          // alert(respuesta);
+          boton.parent('td').parent('tr').remove();
+        });
+      });
+    });
+  </script>
     
   </body>
 </html>
