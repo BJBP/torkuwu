@@ -16,6 +16,7 @@ if(isset($_SESSION['carrito'])){
     if($encontro == true){
     $arreglo[$numero]['Cantidad']=$arreglo [$numero]['Cantidad']+1;
     $_SESSION['carrito']=$arreglo;
+    header("Location: ./cart.php");
     }else{
       $nombre ="";
       $precio =""; 
@@ -34,6 +35,7 @@ if(isset($_SESSION['carrito'])){
       );
       array_push($arreglo, $arregloNuevo);
       $_SESSION['carrito']=$arreglo;
+      header("Location: ./cart.php");
       }
     }
   }else{
@@ -55,6 +57,7 @@ if(isset($_SESSION['carrito'])){
     'Cantidad' => 1
   );
 $_SESSION['carrito']=$arreglo;
+header("Location: ./cart.php");
 }
 }
 
