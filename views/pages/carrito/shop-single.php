@@ -30,7 +30,39 @@ header("Location: ./index.php");
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/style.css">
-    
+    <!-- <style>
+        .zoom {
+            display: inline-block;
+            position: relative;
+        }
+
+        .zoom img {
+            transition: transform 0.3s;
+        }
+
+        .zoom:hover img {
+            transform: scale(1.2);
+        }
+    </style> -->
+    	<style type="text/css">
+		.img1 {
+			position:absolute; 
+			top:0px; 
+			left:0px; 
+			border:0px; 
+			overflow:hidden; 
+			display:block
+		}
+		.img2 {
+			position:absolute; 
+			top:0px; 
+			left:0px;
+			border:0px; 
+			overflow:hidden; 
+			display:none; 
+			clip: rect(0px, 100px, 100px, 0px);
+		}
+	</style>
   </head>
   <body>
   
@@ -41,7 +73,35 @@ header("Location: ./index.php");
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img src="images/<?php echo $fila[4];?>" alt="<?php echo $fila[1];?>" class="img-fluid">
+            <!-- <div class="zoom"> -->
+            <!-- <img src="images/<?php echo $fila[4];?>" alt="<?php echo $fila[1];?>" class="img-fluid"> -->
+            <img name="nor" class="img1" src="images/<?php echo $fila[4];?>" width="400">
+            <img name="big" class="img2" src="images/<?php echo $fila[4];?>" width="800">
+
+            <script type="text/javascript">
+
+              document.onmousemove=mtrack;
+              function mtrack(e) {
+                var x,y,x1,x2,y1,y2;
+                fact=800/400;
+                opp=100;
+
+                if (e==null) e=window.event;
+                x=e.clientX;
+                y=e.clientY;
+
+                x1=-opp+(x)*fact;
+                y1=-opp+(y)*fact; 
+                x2=+opp+(x)*fact; 
+                y2=+opp+(y)*fact; 
+
+                document.images.big.style.display="inline";
+                document.images.big.style.left=(x)*(1-fact);
+                document.images.big.style.top=(y)*(1-fact);
+                document.images.big.style.clip="rect("+y1+"px,"+x2+"px,"+y2+"px,"+x1+"px)";
+              }
+            </script>
+            <!-- </div> -->
           </div>
           <div class="col-md-6">
             <h2 class="text-black"><?php echo $fila[1];?></h2>
