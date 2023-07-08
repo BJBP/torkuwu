@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['carrito'])){
+header('Location: ./index.php');
+}
+$arreglo = $_SESSION['carrito'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -88,7 +96,7 @@
         </div>
       </div>
     </div> -->
-    <img src="images/header.png" alt="Marcador de posición de imagen" class="img-fluid" width="1366" height="100">
+    <!-- <img src="images/header.png" alt="Marcador de posición de imagen" class="img-fluid" width="1366" height="100"> -->
  
 
     <div class="site-section">
@@ -296,7 +304,22 @@
                       <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Total</font></font></th>
                     </tr></thead>
                     <tbody>
-                      <tr>
+                    <?php
+                    $total = 0;
+                    for ($i=0;$i<count($arreglo); $i++){
+                    $total =$total+ ($arreglo[$i][ 'Precio' ]*$arreglo[$i]['Cantidad']);?>
+                    <tr>
+                    <td><?php echo $arreglo[$i]['Nombre']; ?> </td> 
+                    <td>$<?php echo number_format($arreglo[$i]['Precio'], 2, '.', ''); ?></td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                    <tr>
+                    <td>Order Total</td>
+                    <td>$<?php echo number_format($total, 2, '.','');?></td>
+                    </tr>
+                      <!-- <tr>
                         <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Camiseta de recarga </font></font><strong class="mx-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">x</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 1</font></font></td>
                         <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">$250.00</font></font></td>
                       </tr>
@@ -311,7 +334,7 @@
                       <tr>
                         <td class="text-black font-weight-bold"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Total del pedido</font></font></strong></td>
                         <td class="text-black font-weight-bold"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">$350.00</font></font></strong></td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
 
@@ -346,7 +369,7 @@
                   </div>
 
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='thankyou.html'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Realizar pedido</font></font></button>
+                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='thankyou.php'"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Realizar pedido</font></font></button>
                   </div>
 
                 </div>

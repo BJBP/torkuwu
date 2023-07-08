@@ -107,9 +107,11 @@ header("Location: ./cart.php");
                 </thead>
                 <tbody>
                 <?php
+                $total=0;
                 if(isset($_SESSION['carrito'])){ 
                   $arregloCarrito =$_SESSION['carrito']; 
                   for ($i=0;$i<count($arregloCarrito); $i++){
+                    $total= $total + ($arregloCarrito[$i]['Precio']* $arregloCarrito[$i]['Cantidad'] );
                 ?>
                   <tr>
                     <td class="product-thumbnail">
@@ -175,7 +177,7 @@ header("Location: ./cart.php");
           <div class="col-md-6 pl-5">
             <div class="row justify-content-end">
               <div class="col-md-7">
-                <!-- <div class="row">
+                <div class="row">
                   <div class="col-md-12 text-right border-bottom mb-5">
                     <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                   </div>
@@ -185,7 +187,7 @@ header("Location: ./cart.php");
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">S/230.00</strong>
+                    <strong class="text-black">S/<?php echo $total;?></strong>
                   </div>
                 </div>
                 <div class="row mb-5">
@@ -193,9 +195,9 @@ header("Location: ./cart.php");
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">S/230.00</strong>
+                    <strong class="text-black">S/<?php echo $total;?></strong>
                   </div>
-                </div> -->
+                </div>
 
                 <div class="row">
                   <div class="col-md-12">
