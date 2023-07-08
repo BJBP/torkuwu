@@ -12,8 +12,8 @@ header("Location: ./index.php");
 header("Location: ./index.php");
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html> -->
+<html><!--  lang="en" -->
   <head>
     <title>Tienda</title>
     <meta charset="utf-8">
