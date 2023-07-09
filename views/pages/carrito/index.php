@@ -37,7 +37,7 @@ session_start();
             <div class="row">
               <div class="col-md-12 mb-5">
                 <div class="float-md-left mb-4"><h2 class="text-black h5">Ropa</h2></div>
-                <div class="d-flex">
+                <!-- <div class="d-flex">
                   <div class="dropdown mr-1 ml-md-auto">
                     <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Latest
@@ -59,7 +59,7 @@ session_start();
                       <a class="dropdown-item" href="#">Price, high to low</a>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="row mb-5">
@@ -124,53 +124,69 @@ session_start();
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categorias</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="#" class="d-flex"><span>Hombre</span> <span class="text-black ml-auto">(2,220)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>Mujer</span> <span class="text-black ml-auto">(2,550)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>Niños</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+              <?php
+              $re= $conexion->query("select * from categorias "); 
+              while($f= mysqli_fetch_array($re)){
+                ?>
+              <li class="mb-1">
+              <a href="./busqueda.php?texto=<?php echo $f['nombre']?>" class="d-flex"> 
+              <span><?php echo $f['nombre']; ?></span>
+              <span class="text-black ml-auto">
+              <?php
+              $re2 = $conexion->query("select count(*) from productos where id_categoria = ".$f['id']);
+              $fila = mysqli_fetch_row($re2);
+              echo $fila[0];
+              ?>
+              </span>
+              </a></li>
+              <?php } ?>
               </ul>
             </div>
 
             <div class="border p-4 rounded mb-4">
-              <div class="mb-4">
+              <!-- <div class="mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">Filtrar por precio</h3>
                 <div id="slider-range" class="border-primary"></div>
                 <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
-              </div>
+              </div> -->
 
               <div class="mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">Tamaño</h3>
                 <label for="s_sm" class="d-flex">
-                  <input type="checkbox" id="s_sm" class="mr-2 mt-1"> <span class="text-black">Pequeño (2,319)</span>
+                  <a href="./busqueda.php?texto=XL">
+                    <!-- <input type="checkbox" id="s_sm" class="mr-2 mt-1"> --> <span class="text-black">XL</span>
+                  </a>
                 </label>
-                <label for="s_md" class="d-flex">
-                  <input type="checkbox" id="s_md" class="mr-2 mt-1"> <span class="text-black">Medio (1,282)</span>
-                </label>
-                <label for="s_lg" class="d-flex">
-                  <input type="checkbox" id="s_lg" class="mr-2 mt-1"> <span class="text-black">Largo (1,392)</span>
-                </label>
+                <!-- <label for="s_md" class="d-flex"> -->
+                  <a href="./busqueda.php?texto=25">
+                    <!-- <input type="checkbox" id="s_md" class="mr-2 mt-1"> --> <span class="text-black">25</span>
+                  </a>
+                <!-- </label> -->
+                <!-- <label for="s_lg" class="d-flex">
+                  <a href="./busqueda.php?texto=XL">
+                    <input type="checkbox" id="s_lg" class="mr-2 mt-1"> <span class="text-black">Largo (1,392)</span>
+                  </a>
+                </label> -->
               </div>
 
+              
               <div class="mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">Color</h3>
-                <a href="#" class="d-flex color-item align-items-center" >
-                  <span class="bg-danger color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Rojo (2,429)</span>
+                <?php
+                $re = $conexion->query("SELECT * from colore") or die($conexion -> error); ;
+                while($f=mysqli_fetch_array($re)){
+                ?>
+                <a href="./busqueda.php?texto=<?php echo $f['color']; ?>" class="d-flex color-item align-items-center">
+                <span style="background-color:<?php echo $f['codigo']; ?>" class=" color d-inline-block rounded-circle mr-2"></span> <span class="text-black"><?php echo $f['color']; ?></span>
                 </a>
-                <a href="#" class="d-flex color-item align-items-center" >
-                  <span class="bg-success color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Verde (2,298)</span>
-                </a>
-                <a href="#" class="d-flex color-item align-items-center" >
-                  <span class="bg-info color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Azul (1,075)</span>
-                </a>
-                <a href="#" class="d-flex color-item align-items-center" >
-                  <span class="bg-primary color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Purpura (1,075)</span>
-                </a>
+                <?php } ?>
               </div>
 
             </div>
           </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-12">
             <div class="site-section site-blocks-2">
                 <div class="row justify-content-center text-center mb-5">
@@ -216,11 +232,11 @@ session_start();
               
             </div>
           </div>
-        </div>
+        </div> -->
         
       </div>
     </div>
-    <!-- <?php include("./layouts/header.php"); ?>  -->
+    <?php include("./layouts/footer.php"); ?> 
 
     
   </div>

@@ -81,9 +81,9 @@ unset($_SESSION['carrito']);
         <div class="row">
           <div class="col-md-12 text-center">
             <span class="icon-check_circle display-3 text-success"></span>
-            <h2 class="display-3 text-black">Thank you!</h2>
-            <p class="lead mb-5">You order was successfuly completed.</p>
-            <p><a href="index.php" class="btn btn-sm btn-primary">Back to shop</a></p>
+            <h2 class="display-3 text-black">Gracias!</h2>
+            <p class="lead mb-5">Tu orden ha sido completada.</p>
+            <p><a href="index.php" class="btn btn-sm btn-primary">Volver</a></p>
             <p><a href="verpedido.php?id_venta=<?php echo $id_venta;?>" class="btn btn-sm btn-primary">Ver pedido</a></p>
           </div>
         </div>
