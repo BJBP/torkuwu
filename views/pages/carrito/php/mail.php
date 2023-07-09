@@ -34,7 +34,7 @@ $message.= '<td>'. ($arregloCarrito[$i]['Precio']*$arregloCarrito[$i]['Cantidad'
 }
 $message.='</tbody></table>';
 $message.= '<h2>Total de la compra: '.$total. '</h2>';
-$message.= '<a href="http://localhost/carrito/verpedido.php?id_venta='.$id_venta.'" style="background-color: brown; color: white; padding: 10px;text-decoration:none;">
+$message.= '<a href="http://localhost/views/pages/carrito/verpedido.php?id_venta='.$id_venta.'" style="background-color: brown; color: white; padding: 10px;text-decoration:none;">
 Ver Status del pedido
 </a> </body></html>';
 if(mail($to, $subject, $message, $header)){
