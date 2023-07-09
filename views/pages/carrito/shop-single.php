@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("./php/conexion.php");
 if(isset($_GET['id'])){
 $resultado = $conexion ->query("select * from productos where id=".$_GET['id']) or die($conexion->error);
