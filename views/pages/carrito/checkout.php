@@ -97,7 +97,8 @@ $arreglo = $_SESSION['carrito'];
       </div>
     </div> -->
     <!-- <img src="images/header.png" alt="Marcador de posición de imagen" class="img-fluid" width="1366" height="100"> -->
- 
+    <?php include("./layouts/header.php"); ?> 
+
     <form action="./thankyou.php" method="post">
       <div class="site-section">
         <div class="container">
