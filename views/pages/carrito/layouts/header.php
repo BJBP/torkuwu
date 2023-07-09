@@ -71,7 +71,8 @@
       </div>
     </div>
     <img src="images/header.png" alt="Image placeholder" class="img-fluid" width="1366" height="100"> -->
-    <header class="main-header">
+    <header class="site-navbar" role="banner">
+    <!-- <header class="main-header"> -->
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
     <div class="container-fluid">
@@ -193,6 +194,20 @@
                 echo '<i class="fa-solid fa-cart-shopping"></i>';
             }
           ?>
+
+
+                  </li> 
+                  <a href="cart.php" class="site-cart">
+                      <span class="icon icon-shopping_cart"></span>
+                      <span class="count">
+                      <?php if(isset($_SESSION['carrito'])){ 
+                        echo count($_SESSION['carrito' ]); 
+                      }else{ 
+                        echo 0; 
+                      }
+                      ?>
+                      </span>
+                    </a>
         </div>
       </div>
     </div>

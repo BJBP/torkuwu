@@ -968,11 +968,11 @@ a {
     .site-navbar .site-logo a:hover {
       text-decoration: none; }
   .site-navbar a {
-    color: #868995; }
+    color: #fff; }
     .site-navbar a:hover {
       color: #3d3f45; }
   .site-navbar .icon {
-    font-size: 20px; }
+    font-size: 40px; }
   .site-navbar .site-top-icons ul, .site-navbar .site-top-icons ul li {
     padding: 0;
     margin: 0;
