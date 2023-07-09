@@ -133,8 +133,10 @@
           <?php
             if(!isset($_SESSION["iniciarSesion"]) || $_SESSION["id_tipo_usuario"] == 2){
                 echo '<div class="input-wrapper">
-                <input type="search" class="input" placeholder="Búsqueda"/>
-              
+                <form action="./busqueda.php" class="site-block-top-search" method ="GET">
+                <input type="search" class="input" placeholder="Búsqueda"/ name="texto">
+              <!-- <input type="text" class="form-control border-0" placeholder="Search"> -->
+              </form>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="input-icon"
